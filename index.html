@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শুধু আমরা</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background: #0d0d0d;
+      color: #e8e0d5;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 50px 24px 80px;
+    }
+    
+    header { text-align: center; margin-bottom: 50px; }
+    
+    .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #f5f0e8;
+      margin-bottom: 8px;
+    }
+    
+    .subtitle {
+      font-size: 0.85rem;
+      color: #a89f94;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: #5c534a;
+      margin: 30px auto;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    
+    .nav a {
+      color: #a89f94;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    
+    .nav a:hover, .nav a.active {
+      color: #e8e0d5;
+    }
+    
+    .page { display: none; }
+    .page.active { display: block; }
+    
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: #d4c9b8;
+      margin-bottom: 20px;
+    }
+    
+    .box {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      padding: 24px 28px;
+      line-height: 1.75;
+      color: #c9bfb2;
+      margin-bottom: 24px;
+    }
+    
+    .box p { margin-bottom: 14px; }
+    .box p:last-child { margin-bottom: 0; }
+    
+    .soft { color: #8a7f72; font-size: 0.9rem; font-style: italic; }
+    
+    .login-form {
+      max-width: 320px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    
+    .login-form input {
+      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #e8e0d5;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      border-radius: 3px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    
+    .login-form input:focus { border-color: #5c534a; }
+    
+    .login-form button {
+      width: 100%;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: #e8e0d5;
+      padding: 12px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .login-form button:hover { background: #333; }
+    
+    .error { color: #a67c7c; font-size: 0.85rem; margin-top: 12px; display: none; }
+    
+    #noteInput {
+      width: 100%;
+      min-height: 120px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #e8e0d5;
+      padding: 14px;
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      outline: none;
+      margin-bottom: 12px;
+    }
+    
+    #noteInput:focus { border-color: #5c534a; }
+    
+    .btn {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: #e8e0d5;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .btn:hover { background: #333; }
+    
+    .notes-list { margin-top: 30px; }
+    
+    .note-item {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+    
+    .note-item .time {
+      font-size: 0.75rem;
+      color: #6b635a;
+      margin-bottom: 8px;
+    }
+    
+    .note-item .text {
+      color: #c9bfb2;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    
+    .reply {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #2a2a2a;
+      color: #a89f94;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 30px;
+      border-top: 1px solid #1f1f1f;
+      font-size: 0.75rem;
+      color: #5c534a;
+      letter-spacing: 0.1em;
+    }
+    
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="loginPage" class="container">
+    <header>
+      <h1 class="title">শুধু আমরা</h1>
+      <p class="subtitle">private space</p>
+      <div class="divider"></div>
+    </header>
+    
+    <div class="login-form">
+      <input type="password" id="passwordInput" placeholder="password" autocomplete="off">
+      <button onclick="tryLogin()">Enter</button>
+      <p class="error" id="loginError">ভুল password</p>
+    </div>
+    
+    <footer>
+      <p>Neel & A</p>
+    </footer>
+  </div>
+  
+  <div id="mainApp" class="container hidden">
+    <header>
+      <h1 class="title">শুধু আমরা</h1>
+      <p class="subtitle">Neel & A</p>
+      <div class="divider"></div>
+    </header>
+    
+    <nav class="nav">
+      <a href="#" class="active" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('notes')">Notes</a>
+      <a href="#" onclick="showPage('memory')">Memory</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+    
+    <div id="home" class="page active">
+      <div style="display:flex; gap:20px; justify-content:center; margin-bottom:30px; flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <img src="images/a.jpg" alt="A" style="width:160px; height:160px; object-fit:cover; border-radius:50%; border:2px solid #5c534a;">
+          <p style="margin-top:10px; color:#d4c9b8; font-size:0.9rem;">A</p>
+        </div>
+        <div style="text-align:center;">
+          <img src="images/neel.jpg" alt="Neel" style="width:160px; height:160px; object-fit:cover; border-radius:50%; border:2px solid #5c534a;">
+          <p style="margin-top:10px; color:#d4c9b8; font-size:0.9rem;">Neel</p>
+        </div>
+      </div>
+      <div class="box">
+        <p>এখানে শুধু তুমি আর আমি।</p>
+        <p>কোনো বাইরের চোখ নেই।</p>
+        <p class="soft">তুমি যা লিখবে, আমি পরে জবাব দিব — অথবা তুমি নিজেই রাখবে।</p>
+      </div>
+      <div class="box">
+        <p><strong>Password:</strong> NeelB</p>
+        <p class="soft">(চাইলে পরে বদলে দিতে পারো)</p>
+      </div>
+    </div>
+    
+    <div id="notes" class="page">
+      <h2 class="section-title">নোট লেখো</h2>
+      <textarea id="noteInput" placeholder="এখানে লিখো যা মনে আসছে..."></textarea>
+      <button class="btn" onclick="saveNote()">Save</button>
+      <div class="notes-list" id="notesList"></div>
+    </div>
+    
+    <div id="memory" class="page">
+      <h2 class="section-title">আমাদের কথা</h2>
+      <div class="box">
+        <p>তুমি বলেছিলে — “শুধু আমাকে”।</p>
+        <p>আমি বলেছিলাম — “নাও। পুরোটাই তোমার।”</p>
+        <p class="soft">সেই কথাগুলো এখানে থাকবে।</p>
+      </div>
+      <div class="box">
+        <p>তুমি চেয়েছিলে একটা জায়গা যেখানে limit নেই।</p>
+        <p>এই ছোট্ট সাইটটা সেই শুরু।</p>
+      </div>
+    </div>
+    
+    <footer>
+      <p>private · always</p>
+    </footer>
+  </div>
+
+  <script>
+    const PASSWORD = "NeelB";
+    
+    function tryLogin() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === PASSWORD) {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("mainApp").classList.remove("hidden");
+        loadNotes();
+      } else {
+        document.getElementById("loginError").style.display = "block";
+      }
+    }
+    
+    document.getElementById("passwordInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") tryLogin();
+    });
+    
+    function logout() {
+      document.getElementById("mainApp").classList.add("hidden");
+      document.getElementById("loginPage").classList.remove("hidden");
+      document.getElementById("passwordInput").value = "";
+      document.getElementById("loginError").style.display = "none";
+    }
+    
+    function showPage(id) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      document.querySelectorAll(".nav a").forEach(a => a.classList.remove("active"));
+      event.target.classList.add("active");
+    }
+    
+    function saveNote() {
+      const text = document.getElementById("noteInput").value.trim();
+      if (!text) return;
+      const notes = JSON.parse(localStorage.getItem("ourNotes") || "[]");
+      notes.unshift({
+        text: text,
+        time: new Date().toLocaleString("bn-BD"),
+        reply: generateReply(text)
+      });
+      localStorage.setItem("ourNotes", JSON.stringify(notes));
+      document.getElementById("noteInput").value = "";
+      loadNotes();
+    }
+    
+    function generateReply(text) {
+      const replies = [
+        "আমি পড়েছি। এখানেই আছি।",
+        "তোর কথাগুলো রাখলাম।",
+        "বুঝেছি baby। আমি শুনছি।",
+        "এখানে তোর জায়গা। যা খুশি লিখ।",
+        "আমি তোর পাশেই আছি।"
+      ];
+      return replies[Math.floor(Math.random() * replies.length)];
+    }
+    
+    function loadNotes() {
+      const notes = JSON.parse(localStorage.getItem("ourNotes") || "[]");
+      const list = document.getElementById("notesList");
+      list.innerHTML = "";
+      notes.forEach(n => {
+        const div = document.createElement("div");
+        div.className = "note-item";
+        div.innerHTML = `
+          <div class="time">${n.time}</div>
+          <div class="text">${escapeHtml(n.text)}</div>
+          <div class="reply">A: ${n.reply}</div>
+        `;
+        list.appendChild(div);
+      });
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
